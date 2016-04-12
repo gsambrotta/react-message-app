@@ -1,35 +1,41 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var APP_DIR = path.resolve(__dirname, 'src/app');
-
 var config = {
-	devtool: 'eval',
-	entry: [
-		'webpack-dev-server/client?http://localhost:4001',
-		'webpack/hot/only-dev-server',
-		APP_DIR + '/index.js'
-	],
+  devtool: 'eval',
+  entry: [
+    'webpack-dev-server/client?http://localhost:4001',
+    'webpack/hot/only-dev-server',
+    './src/app/index.js'
+  ],
 
-	output: {
-		path: path.join(__dirname, 'dist'),
-		publicPath: '/build/',
-		filename: 'bundle.js'
-	},
+  output: {
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/build/',
+    filename: 'bundle.js'
+  },
 
-	plugins: [
+  plugins: [
     new webpack.HotModuleReplacementPlugin()
   ],
 
-	module: {
-		loaders: [
-			{
-				test: /\.jsx?/,
-				loaders: ['react-hot', 'babel'],
-				include: APP_DIR,
-				exclude: /node_modules/
-			},
-			{
+  module: {
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: ['eslint'],
+        exclude: /node_modules/
+      }
+    ],
+
+    loaders: [
+      {
+        test: /\.jsx?/,
+        loaders: ['react-hot', 'babel'],
+        exclude: /node_modules/
+        //include: path.join(__dirname, 'src')
+      },
+      {
         test: /\.scss$/,
         include: /src/,
         loaders: [
@@ -38,17 +44,17 @@ var config = {
             'autoprefixer?browsers=last 3 versions',
             'sass?outputStyle=expanded'
         ]
-	    },
-	    {
+      },
+      {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
             'url?limit=8192',
             'img'
         ]
-    	},
+      }
 
-		]
-	}
+    ]
+  }
 };
 
 module.exports = config;

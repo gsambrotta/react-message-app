@@ -1,9 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Hello from './hello';
+import {Route, IndexRoute, Router, Link, hashHistory} from 'react-router';
+
+import ConversationsList from './components/ConversationsList.js';
+import Conversation from './components/Conversation.js';
+
+export default class App extends React.Component {
+  constructor() {
+    super();
+  }
+
+  render() {
+    return(
+      <main>
+        {this.props.children}
+      </main>
+    )
+  }
+}
+
+App.propsType = {};
 
 
 ReactDOM.render(
-	<Hello />,
-	document.getElementById('app')
+  
+  <Router history={hashHistory}>
+
+   <Route path="/" component={App}>
+    <IndexRoute component={ConversationsList}></IndexRoute>
+    <Route path="/:conversation" component={Conversation}></Route>
+   </Route>
+
+  </Router>,
+  document.getElementById('app')
 );
