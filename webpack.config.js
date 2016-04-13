@@ -23,7 +23,7 @@ var config = {
     preLoaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['eslint'],
+        loaders: ['eslint-loader'],
         exclude: /node_modules/
       }
     ],

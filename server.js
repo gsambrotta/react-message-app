@@ -1,15 +1,12 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+import apiServer from "./json-api-server";
+import webpackServer from "./webpack-server";
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true
-}).listen(4001, 'localhost', function (err, result) {
-  if (err) {
-    return console.log(err);
-  }
+const PORT = process.env.PORT || 4001;
+const PROD = process.env.NODE_ENV === "production";
 
-  console.log('Listening at http://localhost:4001');
-});
+if (PROD) {
+  apiServer(PORT);
+} else {
+  apiServer(PORT - 1);
+  webpackServer(PORT);
+}

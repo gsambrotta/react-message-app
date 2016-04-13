@@ -1,43 +1,54 @@
 import React from 'react';
 
 import Avatar from './Avatar';
-{/*import NewMessageInput from './NewMessageInput.js'; */}
+import NewMessageInput from './NewMessageInput.js';
 import messages from '../../data/messages.js'
 
 
 
-const MessagesList = (props) => {
-
+export class MessagesList extends React.Component {
+  constructor(props) {
+    super();
+  }
 
   // Filter message from conversation's sender
-  function filterMessageBySender(obj){
-    if ('from' in obj && obj.from === props.sender.nickname) {
+  filterMessageBySender(obj){
+    if ('from' in obj && obj.from === this.props.sender.nickname) {
       return true;
     }
   } 
-  const messagesByCurrentSender = messages.filter(filterMessageBySender);
+
+  handleMessageSubmit() {
+    console.log('submit');
+  }
   
-  // Print message from conversation's sender
-  const messageBlock = messagesByCurrentSender.map(message => (
-    <section key={message.id}>
-
-      <Avatar image={props.sender.pic} />
-      <p> {message.body} </p>
-      <span> {message.date} </span>
-
-    </section>
-  )) 
+  render() {
+    let messagesByCurrentSender = messages.filter(this.filterMessageBySender.bind(this));
   
-  return (
-    <div>
+    // Print message from conversation's sender
+    let messageBlock = messagesByCurrentSender.map(message => (
+      <section key={message.id}>
 
-      {messageBlock}
-      
-      {/* <NewMessageInput /> */}
-    </div>
-  )
+        <Avatar image={this.props.sender.pic} />
+        <p> {message.body} </p>
+        <span> {message.date} </span>
+
+      </section>
+    ))
+
+    return (
+      <div>
+
+        {messageBlock}
+        
+        <NewMessageInput onMessageSubmit={this.handleMessageSubmit.bind(this)} /> 
+      </div>
+    )
+  }
 };
 
-MessagesList.propsType = {};
+MessagesList.propsType = {
+  sender: React.PropTypes.object.isRequired
+};
 
 export default MessagesList;

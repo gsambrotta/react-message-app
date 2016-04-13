@@ -1,17 +1,36 @@
 import React from 'react';
 
-import MessagesList from './components/conversation-item/MessagesList.js';
-import Avatar from './components/conversation-item/Avatar.js';
+import MessagesList from './MessagesList.js';
 
 
-const NewMessageInput = (props) => {
+export class NewMessageInput extends React.Component {
+  constructor(props) {
+  	super();
+
+  	this.state = {
+  		message: ''
+  	}
+  }
+
+  handleNewMessage(e) {
+  	this.setState({message: e.target.value})
+  }
   
-  return (
-    <div>
-      <input type='text' placeholder='write your message' />
-    </div>
-  )
-};
+  render() {
+	  return (
+	    <form onSubmit={this.handleSubmit}>
+
+	      <input 
+	      	type='text' 
+	      	placeholder='write your message'
+	      	value={this.state.message}
+	      	onChange={this.handleNewMessage} 
+	      />
+
+	    </form>
+	  )
+  }
+}
 
 NewMessageInput.propsType = {};
 
