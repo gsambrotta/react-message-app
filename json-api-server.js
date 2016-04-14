@@ -1,20 +1,18 @@
-import express from "express";
-import serveStatic from "serve-static";
-import fs from "fs";
-import path from "path";
-import bodyParser from "body-parser";
-import API from "data/messages.json";
+var express = require('express');
+var serveStatic = require('serve-static');
+var fs = require('fs');
+var path = require('path');
+var bodyParser = require('body-parser');
 
 
-export default (PORT) => {
+module.exports = (PORT) => {
 
-  const MESSAGES_FILE = path.join(__dirname, API);  
+  const MESSAGES_FILE = path.join(__dirname, 'src/app/data/messages.json');
   const app = express();
 
-  app.use(serveStatic(__dirname + "/build"));
+  app.use(serveStatic(__dirname + '/build'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
-  app.use(API);
 
   // Additional middleware which will set headers that we need on each request.
   app.use(function(req, res, next) {
@@ -27,7 +25,7 @@ export default (PORT) => {
       next();
   });
 
-  app.get('/api/messages', function(req, res) {
+  app.get('/messages', function(req, res) {
     fs.readFile(MESSAGES_FILE, function(err, data) {
       if (err) {
         console.error(err);
@@ -37,7 +35,7 @@ export default (PORT) => {
     });
   });
 
-  app.post('/api/messages', function(req, res) {
+  app.post('/messages', function(req, res) {
     fs.readFile(MESSAGES_FILE, function(err, data) {
       if (err) {
         console.error(err);
@@ -63,7 +61,7 @@ export default (PORT) => {
     });
   });
 
-  app.listen(PORT, function (err, result) {
+  app.listen(PORT, function (err) {
     if (err) {
       return console.log(err);
     }

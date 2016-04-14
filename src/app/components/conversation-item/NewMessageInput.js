@@ -1,34 +1,38 @@
 import React from 'react';
 
-import MessagesList from './MessagesList.js';
+//import MessagesList from './MessagesList.js';
 
 
 export class NewMessageInput extends React.Component {
   constructor(props) {
-  	super();
+    super();
 
-  	this.state = {
-  		message: ''
-  	}
+    this.state = {
+      message: ''
+    }
   }
 
   handleNewMessage(e) {
-  	this.setState({message: e.target.value})
+    this.setState({message: e.target.value})
   }
-  
+
+  handleSubmit() {
+    var lintErr = this.props;
+  }
+
   render() {
-	  return (
-	    <form onSubmit={this.handleSubmit}>
+    return (
+      <form onSubmit={this.handleSubmit}>
 
-	      <input 
-	      	type='text' 
-	      	placeholder='write your message'
-	      	value={this.state.message}
-	      	onChange={this.handleNewMessage} 
-	      />
+        <input
+          type="text"
+          placeholder="write your message"
+          value={this.state.message}
+          onChange={this.handleNewMessage}
+        />
 
-	    </form>
-	  )
+      </form>
+    )
   }
 }
 

@@ -16,15 +16,16 @@ export class MessagesList extends React.Component {
     if ('from' in obj && obj.from === this.props.sender.nickname) {
       return true;
     }
-  } 
+  }
 
   handleMessageSubmit() {
     console.log('submit');
+    var lintErr = this.props;
   }
-  
+
   render() {
     let messagesByCurrentSender = messages.filter(this.filterMessageBySender.bind(this));
-  
+
     // Print message from conversation's sender
     let messageBlock = messagesByCurrentSender.map(message => (
       <section key={message.id}>
@@ -40,12 +41,12 @@ export class MessagesList extends React.Component {
       <div>
 
         {messageBlock}
-        
-        <NewMessageInput onMessageSubmit={this.handleMessageSubmit.bind(this)} /> 
+
+        <NewMessageInput onMessageSubmit={this.handleMessageSubmit.bind(this)} />
       </div>
     )
   }
-};
+}
 
 MessagesList.propsType = {
   sender: React.PropTypes.object.isRequired

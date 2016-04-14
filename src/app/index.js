@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Route, IndexRoute, Router, Link, hashHistory} from 'react-router';
+import {Route, IndexRoute, Router, hashHistory} from 'react-router';
 
 import ConversationsList from './components/ConversationsList.js';
 import Conversation from './components/Conversation.js';
@@ -23,7 +23,7 @@ App.propsType = {};
 
 
 ReactDOM.render(
-  
+
   <Router history={hashHistory}>
 
    <Route path="/" component={App}>
