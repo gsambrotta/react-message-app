@@ -8,12 +8,14 @@ module.exports = (PORT) => {
   const server = new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     hot: true,
-    historyApiFallback: true,
+    historyApiFallback: true
+    /*
     proxy: {
       '*' : {
         target: 'http://localhost:' + backendPort
       }
     }
+    */
   });
   server.listen(PORT, 'localhost', function (err) {
     if (err) {

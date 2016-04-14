@@ -1,29 +1,47 @@
 import React from 'react';
 import {Link} from 'react-router';
+import $ from 'jquery';
 
 import people from '../data/people.js'
 
 
-const ConversationsList = () => {
+export default class ConversationsList extends React.Component {
+  component(props) {
+    super();
+  }
 
-  const conversationName = people.map(person => (
-    <li key={person.id}>
-      <Link to={`/${person.nickname}`}> {person.nickname} </Link>
-    </li>
-  ))
-  return(
-    <div>
-      <h1> Messages </h1>
+  loadMessages() {
+    $.getJSON(this.props.messagesUrl, function(data))
+      .done( function(data) {
+        this.setState({data: data});
+      })
+      .fail( function(jqxhr, textstatus, err) {
+        console.log('Json request faild!' + textstatus + ', ' + err);
+      })
+  }
 
-      <ul>
-        {conversationName}
-      </ul>
+  componentDidMount() {
+    this.loadMessages();
+  }
 
-    </div>
-  )
+  render() {
+
+    const conversationName = people.map(person => (
+      <li key={person.id}>
+        <Link to={`/${person.nickname}`}> {person.nickname} </Link>
+      </li>
+    ));
+
+    return(
+      <div>
+        <h1> Messages </h1>
+
+        <ul>
+          {conversationName}
+        </ul>
+
+      </div>
+    )
+  }
 
 };
-
-ConversationsList.propsType = {};
-
-export default ConversationsList;
