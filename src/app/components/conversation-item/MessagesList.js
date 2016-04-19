@@ -20,7 +20,6 @@ export class MessagesList extends React.Component {
 
   handleMessageSubmit() {
     console.log('submit');
-    var lintErr = this.props;
   }
 
   render() {

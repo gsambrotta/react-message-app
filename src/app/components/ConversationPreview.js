@@ -6,23 +6,27 @@ import Avatar from './conversation-item/Avatar.js';
 
 
 const ConversationPreview = (props) => {
-  console.log(props);
-  console.log(props.people);
 
   const conversationName = props.people.map(person => (
-      <li key={person.id}>
-        <Link to={`/${person.nickname}`}> {person.nickname} </Link>
-      </li>
-    ));
+    <li key={person.id}>
+      <Link to={`/${person.nickname}`}>
+        <Avatar image={person.pic} />
+        {person.nickname}
+      </Link>
+    </li>
+  ));
+
 
   return (
-    {conversationName}
+    <ul>
+      {conversationName}
+    </ul>
   )
 };
 
 ConversationPreview.propsType = {
-  people: React.PropTypes.object.isRequired,
-  messages: React.PropTypes.object.isRequired
+  people: React.PropTypes.array.isRequired,
+  messages: React.PropTypes.array.isRequired
 };
 
 export default ConversationPreview;

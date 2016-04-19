@@ -2,7 +2,6 @@ import React from 'react';
 import $ from 'jquery';
 
 import ConversationPreview from './ConversationPreview.js';
-import people from '../data/people.js'
 
 
 export default class ConversationsList extends React.Component {
@@ -16,40 +15,40 @@ export default class ConversationsList extends React.Component {
   }
 
   loadMessages() {
-    $.getJSON(this.props.messagesUrl)
-      .done( function(data) {
+    $.getJSON(this.props.route.messagesUrl)
+
+    .done( function(data) {
         this.setState({messages: data});
-      })
-      .fail( function(jqxhr, textstatus, err) {
+
+    }.bind(this)).fail( function(jqxhr, textstatus, err) {
         console.log('Json request faild!' + textstatus + ', ' + err);
-      })
+    }.bind(this))
   }
 
   loadPeople() {
-    $.getJSON(this.props.peopleUrl)
+    $.getJSON(this.props.route.peopleUrl)
+
       .done( function(data) {
         this.setState({people: data});
-      })
-      .fail( function(jqxhr, textstatus, err) {
+
+      }.bind(this)).fail( function(jqxhr, textstatus, err) {
         console.log('Json request faild!' + textstatus + ', ' + err);
-      })
+      }.bind(this))
   }
 
   componentDidMount() {
     this.loadMessages();
     this.loadPeople();
-    
+    console.log(this.state.messages);
   }
 
   render() {
-    console.log(this.loadPeople())
+
     return(
       <div>
         <h1> Messages </h1>
 
-        <ul>
-          <ConversationPreview people={this.loadPeople} messages={this.loadMessages} />
-        </ul>
+        <ConversationPreview people={this.state.people} messages={this.state.messages} />
 
       </div>
     )
@@ -59,7 +58,7 @@ export default class ConversationsList extends React.Component {
 
 
 ConversationPreview.propsType = {
-  peopleUrl: React.PropTypes.array.isRequired,
-  messagesUrl: React.PropTypes.array.isRequired
+  peopleUrl: React.PropTypes.string.isRequired,
+  messagesUrl: React.PropTypes.string.isRequired
 }
 
