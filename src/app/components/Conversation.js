@@ -2,16 +2,19 @@ import React from 'react';
 
 import MessagesList from './conversation-item/MessagesList.js';
 import Avatar from './conversation-item/Avatar.js';
-import people from '../data/people.js'
+import peopleOld from '../data/people.js'
 
 
 
 const Conversation = (props) => {
 
+  console.log(props);
+  //console.log(people);
+
   function findConversationPerson(person){
     return person.nickname === props.params.conversation
   }
-  const currentPerson = people.find(findConversationPerson); 
+  const currentPerson = peopleOld.find(findConversationPerson); 
 
 
   return (
@@ -27,6 +30,8 @@ const Conversation = (props) => {
   )
 };
 
-Conversation.propsType = {};
+Conversation.propsType = {
+  people: React.PropTypes.array.isRequired
+};
 
 export default Conversation;

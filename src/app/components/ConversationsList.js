@@ -2,6 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 
 import ConversationPreview from './ConversationPreview.js';
+//import Conversation from './Conversation.js';
+
 
 
 export default class ConversationsList extends React.Component {
@@ -40,6 +42,7 @@ export default class ConversationsList extends React.Component {
     this.loadMessages();
     this.loadPeople();
     console.log(this.state.messages);
+    
   }
 
   render() {
@@ -49,7 +52,6 @@ export default class ConversationsList extends React.Component {
         <h1> Messages </h1>
 
         <ConversationPreview people={this.state.people} messages={this.state.messages} />
-
       </div>
     )
   }
