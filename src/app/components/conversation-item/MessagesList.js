@@ -2,8 +2,6 @@ import React from 'react';
 
 import Avatar from './Avatar';
 import NewMessageInput from './NewMessageInput.js';
-import messages from '../../data/messages.js'
-
 
 
 export class MessagesList extends React.Component {
@@ -23,7 +21,7 @@ export class MessagesList extends React.Component {
   }
 
   render() {
-    let messagesByCurrentSender = messages.filter(this.filterMessageBySender.bind(this));
+    let messagesByCurrentSender = this.props.messages.filter(this.filterMessageBySender.bind(this));
 
     // Print message from conversation's sender
     let messageBlock = messagesByCurrentSender.map(message => (

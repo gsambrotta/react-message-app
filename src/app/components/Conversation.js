@@ -2,20 +2,17 @@ import React from 'react';
 
 import MessagesList from './conversation-item/MessagesList.js';
 import Avatar from './conversation-item/Avatar.js';
-import peopleOld from '../data/people.js'
-
 
 
 const Conversation = (props) => {
 
-  console.log(props);
-  //console.log(people);
+  const people = props.location.state.people;
+  const messages = props.location.state.messages;
+  const currentPerson = people.find(findConversationPerson);
 
   function findConversationPerson(person){
     return person.nickname === props.params.conversation
-  }
-  const currentPerson = peopleOld.find(findConversationPerson); 
-
+  } 
 
   return (
     <div>
@@ -24,7 +21,7 @@ const Conversation = (props) => {
         <h1> {props.params.conversation} </h1>
       </header>
       <main>
-        <MessagesList sender={currentPerson}/>
+        <MessagesList sender={currentPerson} messages={messages}/>
       </main>
     </div>
   )

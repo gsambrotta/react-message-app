@@ -6,7 +6,7 @@ import ConversationsList from './components/ConversationsList.js';
 import Conversation from './components/Conversation.js';
 
 export default class App extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
   }
 
@@ -26,7 +26,7 @@ ReactDOM.render(
 
   <Router history={browserHistory}>
 
-   <Route path="/" component={App}>
+   <Route path="/" ciao={'hi'} component={App}>
     <IndexRoute messagesUrl={'http://localhost:4000/messages'} peopleUrl={'http://localhost:4000/people'} component={ConversationsList}></IndexRoute>
     <Route path="/:conversation" component={Conversation}></Route>
    </Route>

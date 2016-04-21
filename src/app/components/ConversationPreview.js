@@ -5,7 +5,6 @@ import Avatar from './conversation-item/Avatar.js';
 import Conversation from './Conversation.js';
 
 
-
 const ConversationPreview = (props) => {
   var people = props.people;
   const messages = props.messages;
@@ -22,13 +21,9 @@ const ConversationPreview = (props) => {
     const messagesByCurrentSender = messages.filter(filterMessageBySender);
     const lastMsg = messagesByCurrentSender[messagesByCurrentSender.length - 1]
 
-    function passProps() {
-      return <Conversation people={people} />
-    }
-
     return (
       <li key={person.id}>
-        <Link to={`/${person.nickname}`} onClick={passProps}>
+        <Link to={{ pathname: `/${person.nickname}`, state: {people: people, messages: messages} }}>
           <Avatar image={person.pic} />
           {person.nickname}
           <p> {lastMsg.body} </p>
