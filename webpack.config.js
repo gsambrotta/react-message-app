@@ -54,6 +54,9 @@ var config = {
       }
 
     ]
+  },
+  eslint: {
+    emitError: true
   }
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 import MessagesList from './conversation-item/MessagesList.js';
 import Avatar from './conversation-item/Avatar.js';
+import NewMessageInput from './conversation-item/NewMessageInput.js';
 
 
 const Conversation = (props) => {
@@ -12,7 +13,26 @@ const Conversation = (props) => {
 
   function findConversationPerson(person){
     return person.nickname === props.params.conversation
-  } 
+  }
+
+  function handleMessageSubmit(message) {
+    const messageUrl = 'http://localhost:4000/messages'
+    message.id = Date.now();
+    message.to = 'anaketa';
+    $.ajax({
+      url: messageUrl,
+      dataType: 'json',
+      type: 'POST',
+      data: message,
+      success: function(data) {
+        // update messages/conversations view
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(messageUrl, status, err.toString());
+      }.bind(this)
+    });
+  }
+
 
   return (
     <div>
@@ -21,13 +41,14 @@ const Conversation = (props) => {
         <h1> {props.params.conversation} </h1>
       </header>
       <main>
-        <MessagesList sender={currentPerson} messages={messages}/>
+        <MessagesList sender={currentPerson} messages={messages} />
+        <NewMessageInput sender={currentPerson.nickname} onMessageSubmit={handleMessageSubmit} />
       </main>
     </div>
   )
 };
 
-Conversation.propsType = {
+Conversation.propTypes = {
   people: React.PropTypes.array.isRequired
 };
 

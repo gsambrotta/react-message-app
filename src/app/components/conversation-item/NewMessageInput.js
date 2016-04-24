@@ -1,6 +1,5 @@
 import React from 'react';
-
-//import MessagesList from './MessagesList.js';
+import $ from 'jquery';
 
 
 export class NewMessageInput extends React.Component {
@@ -8,26 +7,53 @@ export class NewMessageInput extends React.Component {
     super();
 
     this.state = {
-      message: ''
+      body: '',
+      from: this.props.sender,
+      to: ''
     }
   }
 
-  handleNewMessage(e) {
-    this.setState({message: e.target.value})
+  componentDidMount() {
+    $(document.body).on('keydown', this.handleKeyDown);
   }
 
-  handleSubmit() {
-    var lintErr = this.props;
+  componentWillUnmount() {
+    $(document.body).off('keydown', this.handleKeyDown);
+  }
+
+  handleNewMessage(e) {
+    this.setState({body: e.target.value});
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let body = this.state.body.trim();
+    let from = this.state.from.trim();
+    let to = this.state.to.trim();
+    if(!body || !from) {
+      return;
+    }
+
+    this.props.onMessageSubmit({body, from, to});
+    this.setState({body: '', from: '', to: '' })
+  }
+
+  handleKeyDown(e) {
+    let ENTER = 13;
+    if ( e.keyCode == ENTER ) {
+      this.handleNewMessage();
+    }
   }
 
   render() {
+    console.log(this.props);
     return (
       <form onSubmit={this.handleSubmit}>
 
         <input
           type="text"
           placeholder="write your message"
-          value={this.state.message}
+          value={this.state.body}
           onChange={this.handleNewMessage}
         />
 
@@ -36,6 +62,7 @@ export class NewMessageInput extends React.Component {
   }
 }
 
-NewMessageInput.propsType = {};
-
-export default NewMessageInput;
+NewMessageInput.propTypes = {
+  sender: React.PropTypes.string.isRequired,
+  onMessageSubmit: React.PropTypes.func.isRequired
+};

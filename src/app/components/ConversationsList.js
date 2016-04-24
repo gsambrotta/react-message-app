@@ -2,8 +2,6 @@ import React from 'react';
 import $ from 'jquery';
 
 import ConversationPreview from './ConversationPreview.js';
-//import Conversation from './Conversation.js';
-
 
 
 export default class ConversationsList extends React.Component {
@@ -41,8 +39,6 @@ export default class ConversationsList extends React.Component {
   componentDidMount() {
     this.loadMessages();
     this.loadPeople();
-    console.log(this.state.messages);
-    
   }
 
   render() {
@@ -59,7 +55,7 @@ export default class ConversationsList extends React.Component {
 }
 
 
-ConversationPreview.propsType = {
+ConversationsList.propTypes = {
   peopleUrl: React.PropTypes.string.isRequired,
   messagesUrl: React.PropTypes.string.isRequired
 }

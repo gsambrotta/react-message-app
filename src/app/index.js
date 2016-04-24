@@ -26,7 +26,7 @@ ReactDOM.render(
 
   <Router history={browserHistory}>
 
-   <Route path="/" ciao={'hi'} component={App}>
+   <Route path="/" component={App}>
     <IndexRoute messagesUrl={'http://localhost:4000/messages'} peopleUrl={'http://localhost:4000/people'} component={ConversationsList}></IndexRoute>
     <Route path="/:conversation" component={Conversation}></Route>
    </Route>

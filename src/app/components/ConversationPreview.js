@@ -2,15 +2,14 @@ import React from 'react';
 import {Link} from 'react-router';
 
 import Avatar from './conversation-item/Avatar.js';
-import Conversation from './Conversation.js';
 
 
 const ConversationPreview = (props) => {
-  var people = props.people;
+  const people = props.people;
   const messages = props.messages;
 
   const conversationName = people.map(person => {
-    
+
     // Filter message from conversation's sender
     function filterMessageBySender(obj){
       if ('from' in obj && obj.from === person.nickname) {
@@ -35,13 +34,12 @@ const ConversationPreview = (props) => {
   return (
     <ul>
       {conversationName}
-      {props.children}
     </ul>
 
   )
 };
 
-ConversationPreview.propsType = {
+ConversationPreview.propTypes = {
   people: React.PropTypes.array.isRequired,
   messages: React.PropTypes.array.isRequired
 };

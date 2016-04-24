@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Avatar from './Avatar';
-import NewMessageInput from './NewMessageInput.js';
 
 
 export class MessagesList extends React.Component {
@@ -14,10 +13,6 @@ export class MessagesList extends React.Component {
     if ('from' in obj && obj.from === this.props.sender.nickname) {
       return true;
     }
-  }
-
-  handleMessageSubmit() {
-    console.log('submit');
   }
 
   render() {
@@ -38,15 +33,11 @@ export class MessagesList extends React.Component {
       <div>
 
         {messageBlock}
-
-        <NewMessageInput onMessageSubmit={this.handleMessageSubmit.bind(this)} />
       </div>
     )
   }
 }
 
-MessagesList.propsType = {
+MessagesList.propTypes = {
   sender: React.PropTypes.object.isRequired
 };
-
-export default MessagesList;
