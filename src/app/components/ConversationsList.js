@@ -56,7 +56,7 @@ export default class ConversationsList extends React.Component {
 
 
 ConversationsList.propTypes = {
-  peopleUrl: React.PropTypes.string.isRequired,
-  messagesUrl: React.PropTypes.string.isRequired
+  //peopleUrl: React.PropTypes.string.isRequired,
+  //messagesUrl: React.PropTypes.string.isRequired
 }
 

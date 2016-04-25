@@ -1,24 +1,26 @@
+/*global document*/
+
 import React from 'react';
 import $ from 'jquery';
 
 
-export class NewMessageInput extends React.Component {
+export default class NewMessageInput extends React.Component {
   constructor(props) {
     super();
 
     this.state = {
       body: '',
-      from: this.props.sender,
+      from: props.sender,
       to: ''
     }
   }
 
   componentDidMount() {
-    $(document.body).on('keydown', this.handleKeyDown);
+    $(document.body).on('keydown', this.handleKeyDown.bind(this));
   }
 
   componentWillUnmount() {
-    $(document.body).off('keydown', this.handleKeyDown);
+    $(document.body).off('keydown', this.handleKeyDown.bind(this));
   }
 
   handleNewMessage(e) {
@@ -46,15 +48,14 @@ export class NewMessageInput extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit.bind(this)}>
 
         <input
           type="text"
           placeholder="write your message"
           value={this.state.body}
-          onChange={this.handleNewMessage}
+          onChange={this.handleNewMessage.bind(this)}
         />
 
       </form>

@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 import MessagesList from './conversation-item/MessagesList.js';
 import Avatar from './conversation-item/Avatar.js';
@@ -16,7 +17,7 @@ const Conversation = (props) => {
   }
 
   function handleMessageSubmit(message) {
-    const messageUrl = 'http://localhost:4000/messages'
+    const messageUrl = 'http://localhost:4000/messages';
     message.id = Date.now();
     message.to = 'anaketa';
     $.ajax({
@@ -26,10 +27,10 @@ const Conversation = (props) => {
       data: message,
       success: function(data) {
         // update messages/conversations view
-      }.bind(this),
+      },
       error: function(xhr, status, err) {
         console.error(messageUrl, status, err.toString());
-      }.bind(this)
+      }
     });
   }
 
@@ -49,7 +50,8 @@ const Conversation = (props) => {
 };
 
 Conversation.propTypes = {
-  people: React.PropTypes.array.isRequired
+  //people: React.PropTypes.array.isRequired
 };
+
 
 export default Conversation;

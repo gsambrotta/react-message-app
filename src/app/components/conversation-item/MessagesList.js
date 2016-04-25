@@ -3,7 +3,7 @@ import React from 'react';
 import Avatar from './Avatar';
 
 
-export class MessagesList extends React.Component {
+export default class MessagesList extends React.Component {
   constructor(props) {
     super();
   }

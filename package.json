@@ -4,8 +4,8 @@
   "description": "simple react messaging app",
   "main": "index.js",
   "scripts": {
-    "start": "npm run server & npm run lint & open http://localhost:4001",
-    "lint": "eslint . --ext .js --ext .jsx || true",
+    "start": "npm run server & open http://localhost:4001",
+    "lint": "eslint . --ext .js --ext .jsx || true && esw -w",
     "server": "node server.js"
   },
   "repository": {
@@ -41,6 +41,7 @@
     "eslint-config-postcss": "^2.0.2",
     "eslint-loader": "^1.3.0",
     "eslint-plugin-react": "^4.3.0",
+    "eslint-watch": "^2.1.10",
     "express": "^4.13.4",
     "file-loader": "^0.8.5",
     "fs": "0.0.2",
