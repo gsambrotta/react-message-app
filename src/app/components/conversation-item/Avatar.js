@@ -3,8 +3,8 @@ import React from 'react';
 const Avatar = (props) => {
   
   return (
-    <div>
-      <img src={props.image} style={{width: 50, height:50, borderRadius: '50%'}} />
+    <div className="avatar">
+      <img src={props.image} />
     </div>
   )
 };

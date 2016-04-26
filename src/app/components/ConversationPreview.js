@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import moment from 'moment';
 
 import Avatar from './conversation-item/Avatar.js';
 
@@ -9,6 +10,9 @@ const ConversationPreview = (props) => {
   const messages = props.messages;
 
   const conversationName = people.map(person => {
+    const messagesByCurrentSender = messages.filter(filterMessageBySender);
+    const lastMsg = messagesByCurrentSender[messagesByCurrentSender.length - 1]
+    var formattedDate = moment(lastMsg.date, 'DD/MM/YYYY hh:mm').fromNow();
 
     // Filter message from conversation's sender
     function filterMessageBySender(obj){
@@ -17,16 +21,15 @@ const ConversationPreview = (props) => {
       }
     }
 
-    const messagesByCurrentSender = messages.filter(filterMessageBySender);
-    const lastMsg = messagesByCurrentSender[messagesByCurrentSender.length - 1]
-
     return (
-      <li key={person.id}>
-        <Link to={{ pathname: `/${person.nickname}`, state: {people: people, messages: messages} }}>
+      <li key={person.id} className="list-items list-items__preview">
+        <Link to={{ pathname: `/${person.nickname}`}}>
           <Avatar image={person.pic} />
-          {person.nickname}
+          <h2>{person.nickname}</h2>
+          <span>{formattedDate}</span>
           <p> {lastMsg.body} </p>
         </Link>
+        <hr />
       </li>
     )
   });

@@ -10,8 +10,7 @@ export default class NewMessageInput extends React.Component {
 
     this.state = {
       body: '',
-      from: props.sender,
-      to: ''
+      from: props.sender //why not this.props.sender?
     }
   }
 
@@ -31,19 +30,18 @@ export default class NewMessageInput extends React.Component {
     e.preventDefault();
     let body = this.state.body.trim();
     let from = this.state.from.trim();
-    let to = this.state.to.trim();
     if(!body || !from) {
       return;
     }
 
-    this.props.onMessageSubmit({body, from, to});
-    this.setState({body: '', from: '', to: '' })
+    this.props.onMessageSubmit({body, from});
+    this.setState({body: '', from: '' })
   }
 
   handleKeyDown(e) {
     let ENTER = 13;
     if ( e.keyCode == ENTER ) {
-      this.handleNewMessage();
+      this.handleNewMessage(e);
     }
   }
 

@@ -2,27 +2,42 @@
     {
         "id": 1,
         "body": "see you later",
-        "date": "19.03.2016",
+        "date": "19/03/2016 20:17",
         "from": "marcantonio",
         "to": "anaketa"
     },
     {
         "id": 2,
         "body": "Where are you?",
-        "date": "09.04.2016",
+        "date": "09/04/2016 08:45",
         "from": "picchiarello",
         "to": "anaketa"
     },
     {
         "id": 3,
         "body": "Haloo??",
-        "date": "19.04.2016",
+        "date": "19/04/2016 16:23",
         "from": "picchiarello",
         "to": "anaketa"
     },
     {
-        "id": 1461615187741,
-        "body": "ciao",
+        "id": 1461684820185,
+        "body": "waiting..",
+        "date": "26/04/2016 10:03",
+        "from": "picchiarello",
+        "to": "anaketa"
+    },
+    {
+        "id": 1461684998741,
+        "body": "hey!! Long time i don't hear from you!",
+        "date": "26/04/2016 18:43",
+        "from": "marcantonio",
+        "to": "anaketa"
+    },
+    {
+        "id": 1461695721589,
+        "body": "true that!",
+        "date": "26/04/2016 08:35",
         "from": "marcantonio",
         "to": "anaketa"
     }

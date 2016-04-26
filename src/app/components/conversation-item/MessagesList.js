@@ -1,4 +1,6 @@
 import React from 'react';
+import moment from 'moment';
+
 
 import Avatar from './Avatar';
 
@@ -19,21 +21,25 @@ export default class MessagesList extends React.Component {
     let messagesByCurrentSender = this.props.messages.filter(this.filterMessageBySender.bind(this));
 
     // Print message from conversation's sender
-    let messageBlock = messagesByCurrentSender.map(message => (
-      <section key={message.id}>
+    let messageBlock = messagesByCurrentSender.map(message => {
+      var formattedDate = moment(message.date, 'DD/MM/YYYY hh:mm').fromNow();
 
-        <Avatar image={this.props.sender.pic} />
-        <p> {message.body} </p>
-        <span> {message.date} </span>
+      return(
+        <li key={message.id} className="list-items  list-items__conversation">
 
-      </section>
-    ))
+          <Avatar image={this.props.sender.pic} />
+          <p> {message.body} </p>
+          <span> {formattedDate} </span>
+
+        </li>
+      )
+    })
 
     return (
-      <div>
+      <ul>
 
         {messageBlock}
-      </div>
+      </ul>
     )
   }
 }
