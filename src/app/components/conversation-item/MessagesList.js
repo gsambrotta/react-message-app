@@ -10,15 +10,8 @@ export default class MessagesList extends React.Component {
     super();
   }
 
-  // Filter message from conversation's sender
-  filterMessageBySender(obj){
-    if ('from' in obj && obj.from === this.props.sender.nickname) {
-      return true;
-    }
-  }
-
   render() {
-    let messagesByCurrentSender = this.props.messages.filter(this.filterMessageBySender.bind(this));
+    let messagesByCurrentSender = this.props.sendermsg;
 
     // Print message from conversation's sender
     let messageBlock = messagesByCurrentSender.map(message => {
